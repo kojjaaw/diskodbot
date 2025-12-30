@@ -7,24 +7,15 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import os
 from dotenv import load_dotenv
 
-# =====================
-# LOAD TOKEN
-# =====================
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
-# =====================
-# BOT SETUP
-# =====================
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 
 bot = commands.Bot(intents=intents)
 
-# =====================
-# DATABASE (QUEUE)
-# =====================
 db = sqlite3.connect("queue.db")
 cursor = db.cursor()
 
@@ -45,14 +36,6 @@ create table if not exists guild_settings (
     channel_id text)
 """)
 db.commit()
-# =====================
-# EVENT READY
-# =====================
-
-
-# =====================
-# SLASH COMMAND /babuchat
-# =====================
 
 @bot.slash_command(
         name="setlaguchannel",
@@ -121,9 +104,6 @@ async def babuchat(ctx, link: str):
         ephemeral=True
     )
 
-# =====================
-# FUNCTION KIRIM EMBED
-# =====================
 async def kirim_pesan_harian():
     today = datetime.today().strftime("%Y-%m-%d")
     
@@ -172,10 +152,6 @@ async def kirim_pesan_harian():
     )
     db.commit()
 
-
-# =====================
-# SCHEDULER (1x SEHARI)
-# =====================
 scheduler = AsyncIOScheduler()
 scheduler.add_job(
     kirim_pesan_harian,
@@ -237,8 +213,4 @@ async def on_ready():
     print("Waktu server:", datetime.now())
     if not scheduler.running:
         scheduler.start()
-
-# =====================
-# RUN BOT
-# =====================
 bot.run(TOKEN)
