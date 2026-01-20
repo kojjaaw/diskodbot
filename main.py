@@ -68,7 +68,7 @@ async def babuchat(ctx, link: str):
         )
         return
 
-    # ambil tanggal terakhir di antrian
+   
     cursor.execute("""
         SELECT send_date FROM queue
         WHERE status='pending'
@@ -146,6 +146,7 @@ async def kirim_pesan_harian():
         (queue_id,)
     )
     db.commit()
+
 
 scheduler = AsyncIOScheduler()
 scheduler.add_job(
