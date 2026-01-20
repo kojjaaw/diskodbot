@@ -5,7 +5,6 @@ import sqlite3
 from datetime import datetime, timedelta
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import os
-token = os.getenv("DISCORD_TOKEN")
 
 
 intents = discord.Intents.default()
@@ -211,4 +210,7 @@ async def on_ready():
     print("Waktu server:", datetime.now())
     if not scheduler.running:
         scheduler.start()
-bot.run(TOKEN)
+if __name__ == "__main__":
+    token = os.getenv("DISCORD_TOKEN")
+    bot.run(token)
+
