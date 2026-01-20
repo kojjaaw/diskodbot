@@ -5,10 +5,8 @@ import sqlite3
 from datetime import datetime, timedelta
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import os
-from dotenv import load_dotenv
+token = os.getenv("DISCORD_TOKEN")
 
-load_dotenv()
-TOKEN = os.getenv("DISCORD_TOKEN")
 
 intents = discord.Intents.default()
 intents.message_content = True
