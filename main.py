@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from discord import option
 import sqlite3
 from datetime import datetime, timedelta
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -59,7 +58,6 @@ async def setlaguchannel(ctx, channel: discord.TextChannel):
     )
 
 @bot.slash_command(name="babuchat", description="1 hari 1 lagu")
-@option("link", description="umtuk 1 hari satu lagu")
 async def babuchat(ctx, link: str):
     if not link.startswith("https://open.spotify.com/"):
         await ctx.respond(
